@@ -1,6 +1,7 @@
 package moneycalculator;
 
 public class Currency {
+
     private String code;
     private String name;
     private String symbol;
@@ -15,7 +16,7 @@ public class Currency {
         this.code = code;
         this.name = name;
     }
-    
+
     public String getCode() {
         return code;
     }
@@ -27,5 +28,4 @@ public class Currency {
     public String getSymbol() {
         return symbol;
     }
-   
 }
