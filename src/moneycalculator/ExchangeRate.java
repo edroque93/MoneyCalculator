@@ -1,6 +1,5 @@
 package moneycalculator;
 
-
 import java.util.Date;
 import moneycalculator.Currency;
 
@@ -31,5 +30,4 @@ public class ExchangeRate {
     public Date getDate() {
         return date;
     }
-    
 }
