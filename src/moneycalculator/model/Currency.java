@@ -1,4 +1,4 @@
-package moneycalculator;
+package moneycalculator.model;
 
 public class Currency {
 
@@ -28,4 +28,10 @@ public class Currency {
     public String getSymbol() {
         return symbol;
     }
+
+    @Override
+    public String toString() {
+        return "Currency{" + "code=" + code + ", name=" + name + ", symbol=" + symbol + '}';
+    }
+
 }

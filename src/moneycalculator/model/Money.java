@@ -1,4 +1,4 @@
-package moneycalculator;
+package moneycalculator.model;
 
 public class Money {
 
@@ -17,4 +17,10 @@ public class Money {
     public Currency getCurrency() {
         return currency;
     }
+
+    @Override
+    public String toString() {
+        return "Money{" + "amount=" + amount + ", currency=" + currency + '}';
+    }
+
 }

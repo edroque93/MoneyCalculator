@@ -1,7 +1,6 @@
-package moneycalculator;
+package moneycalculator.model;
 
 import java.util.Date;
-import moneycalculator.Currency;
 
 public class ExchangeRate {
 
@@ -9,10 +8,15 @@ public class ExchangeRate {
     private Number rate;
     private Date date;
 
-    public ExchangeRate(Currency from, Currency to, Number rate) {
+    public ExchangeRate(Date date, Currency from, Currency to, Number rate) {
+        this.date = date;
         this.from = from;
         this.to = to;
         this.rate = rate;
+    }
+
+    public ExchangeRate(Currency from, Currency to, Number rate) {
+        this(new Date(), from, to, rate);
     }
 
     public Currency getFrom() {
