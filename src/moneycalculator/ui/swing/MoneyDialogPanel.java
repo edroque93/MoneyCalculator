@@ -1,5 +1,6 @@
 package moneycalculator.ui.swing;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -53,8 +54,8 @@ public class MoneyDialogPanel extends JPanel implements MoneyDialog {
     private void createComponents() {
         this.add(createAmountField());
         result = createResultLabel();
-        this.add(result);
         this.add(createCurrencyDialog());
+        this.add(result);
     }
 
     @Override
@@ -69,6 +70,7 @@ public class MoneyDialogPanel extends JPanel implements MoneyDialog {
 
     private JLabel createResultLabel() {
         JLabel label = new JLabel("");
+        label.setPreferredSize(new Dimension(130, 20));
         return label;
     }
 

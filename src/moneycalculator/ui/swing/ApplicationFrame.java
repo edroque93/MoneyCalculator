@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import moneycalculator.control.ActionListenerFactory;
 import moneycalculator.ui.CurrencyDialog;
@@ -21,7 +20,7 @@ public class ApplicationFrame extends JFrame {
         super("Money Calculator");
 
         this.factory = factory;
-        this.setMinimumSize(new Dimension(370, 170));
+        this.setMinimumSize(new Dimension(437, 150));
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         createComponents();
@@ -78,10 +77,4 @@ public class ApplicationFrame extends JFrame {
     public CurrencyDialog getCurrencyDialog() {
         return currencyDialog;
     }
-
-    private JLabel createResultLabel() {
-        JLabel label = new JLabel("");
-        return label;
-    }
-
 }
