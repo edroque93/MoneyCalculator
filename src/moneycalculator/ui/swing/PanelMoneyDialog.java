@@ -56,7 +56,7 @@ public class PanelMoneyDialog extends JPanel implements MoneyDialog {
     }
 
     private JPanel createCurrencyDialogPanel() {
-        PanelCurrencyDialog panel = new PanelCurrencyDialog();
+        CurrencyPanel panel = new CurrencyPanel();
         this.currencyDialog = panel;
         return panel;
     }

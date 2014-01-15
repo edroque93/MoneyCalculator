@@ -6,11 +6,11 @@ import javax.swing.JPanel;
 import moneycalculator.model.Money;
 import moneycalculator.ui.MoneyViewer;
 
-public class PanelMoneyViewer extends JPanel implements MoneyViewer {
+public class MoneyPanel extends JPanel implements MoneyViewer {
 
     private JLabel label;
 
-    public PanelMoneyViewer() {
+    public MoneyPanel() {
         super(new FlowLayout(FlowLayout.LEFT));
         this.createComponents();
     }
