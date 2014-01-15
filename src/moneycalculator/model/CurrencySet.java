@@ -39,12 +39,12 @@ public class CurrencySet extends HashSet<Currency> {
 
     public Currency[] search(String token) {
         ArrayList<Currency> list = new ArrayList<>();
-        for (Currency currency : list)
+        for (Currency currency : this)
             if (currency.getCode().equalsIgnoreCase(token))
                 list.add(currency);
             else if (currency.getSymbol().equalsIgnoreCase(token))
                 list.add(currency);
-            else if (currency.getName().toLowerCase().contains(token))
+            else if (currency.getName().toLowerCase().contains(token.toLowerCase()))
                 list.add(currency);
 
         return list.toArray(new Currency[0]);

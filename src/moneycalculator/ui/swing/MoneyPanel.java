@@ -8,6 +8,10 @@ import moneycalculator.ui.MoneyViewer;
 
 public class MoneyPanel extends JPanel implements MoneyViewer {
 
+    public static void refresh(String toString) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private JLabel label;
 
     public MoneyPanel() {

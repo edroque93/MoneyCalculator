@@ -14,7 +14,7 @@ public class CurrencyPanel extends JPanel implements CurrencyDialog {
     private Currency currency;
 
     public CurrencyPanel() {
-        this(CurrencySet.getInstance().search("EUR")[0]);
+        this(CurrencySet.getInstance().search("Euro")[0]);
     }
 
     public CurrencyPanel(Currency currency) {
