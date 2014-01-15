@@ -1,34 +1,31 @@
 package moneycalculator.control;
 
+import moneycalculator.model.Currency;
+import moneycalculator.model.ExchangeRate;
 import moneycalculator.model.Money;
-import moneycalculator.model.Number;
+import moneycalculator.model.MoneyExchanger;
+import moneycalculator.persistence.MockExchangeRateLoader;
 import moneycalculator.ui.CurrencyDialog;
 import moneycalculator.ui.MoneyDialog;
-import moneycalculator.ui.MoneyViewer;
+import moneycalculator.ui.swing.MoneyDialogPanel;
 
 public class CalculateCommand extends Command {
 
     private final MoneyDialog moneyDialog;
     private final CurrencyDialog currencyDialog;
-    private final MoneyViewer moneyViewer;
 
-    public CalculateCommand(MoneyDialog moneyDialog, CurrencyDialog currencyDialog, MoneyViewer moneyViewer) {
+    public CalculateCommand(MoneyDialog moneyDialog, CurrencyDialog currencyDialog) {
         this.moneyDialog = moneyDialog;
         this.currencyDialog = currencyDialog;
-        this.moneyViewer = moneyViewer;
     }
 
     @Override
     public void execute() {
-        moneyViewer.show(new Money(calculateAmount(), currencyDialog.getCurrency()));
-    }
+        Money money = moneyDialog.getMoney();
+        Currency currency = currencyDialog.getCurrency();
+        ExchangeRate exchangeRate = new MockExchangeRateLoader().load(money.getCurrency(), currency);
+        Money result = MoneyExchanger.exchange(money, exchangeRate);
+        MoneyDialogPanel.refresh(result.getAmount().toString());
 
-    private Number calculateAmount() {
-        return moneyDialog.getMoney().getAmount().multiply(getExchangeRate());
     }
-
-    private Number getExchangeRate() {
-        return null;
-    }
-
 }

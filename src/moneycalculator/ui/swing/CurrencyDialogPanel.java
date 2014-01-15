@@ -9,15 +9,15 @@ import moneycalculator.model.Currency;
 import moneycalculator.model.CurrencySet;
 import moneycalculator.ui.CurrencyDialog;
 
-public class CurrencyPanel extends JPanel implements CurrencyDialog {
+public class CurrencyDialogPanel extends JPanel implements CurrencyDialog {
 
     private Currency currency;
 
-    public CurrencyPanel() {
+    public CurrencyDialogPanel() {
         this(CurrencySet.getInstance().search("Euro")[0]);
     }
 
-    public CurrencyPanel(Currency currency) {
+    public CurrencyDialogPanel(Currency currency) {
         super(new FlowLayout(FlowLayout.LEFT));
         this.currency = currency;
         this.createComponents();

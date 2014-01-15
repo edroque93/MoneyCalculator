@@ -3,7 +3,7 @@ package moneycalculator.persistence;
 import moneycalculator.model.Currency;
 import moneycalculator.model.CurrencySet;
 
-public class MockCurrencySetLoader {
+public class MockCurrencySetLoader implements CurrencySetLoader {
 
     private static MockCurrencySetLoader instance;
 
@@ -16,6 +16,7 @@ public class MockCurrencySetLoader {
         return instance;
     }
 
+    @Override
     public void load() {
         CurrencySet set = CurrencySet.getInstance();
         set.add(new Currency("EUR", "Euro", "€"));

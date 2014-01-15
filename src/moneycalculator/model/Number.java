@@ -3,7 +3,7 @@ package moneycalculator.model;
 public class Number {
 
     private long numerator;
-    static private long denominator;
+    private long denominator;
 
     public Number(long numerator, long denominator) {
         this.numerator = numerator;
@@ -13,7 +13,7 @@ public class Number {
     }
 
     public Number(Number number) {
-        this(number.numerator, Number.denominator);
+        this(number.numerator, number.denominator);
     }
 
     public Number(int number) {
@@ -37,7 +37,7 @@ public class Number {
     }
 
     public static Number fromDouble(double number) {
-        denominator = 1;
+        int denominator = 1;
         while ((long) number != number) {
             number *= 10;
             denominator *= 10;
@@ -48,9 +48,7 @@ public class Number {
     private void simplify() {
         PrimeCollection primeCollection = new PrimeCollection();
         for (long prime : primeCollection) {
-            if (this.numerator < prime)
-                break;
-            if (Number.denominator < prime)
+            if (numerator < prime || denominator < prime)
                 break;
             reduce(prime);
         }
@@ -96,7 +94,7 @@ public class Number {
     }
 
     private boolean isDivisible(long prime) {
-        return ((numerator % prime) == 0) && ((denominator % prime) == 0);
+       return (numerator % prime == 0 && denominator % prime == 0);        
     }
 
     @Override

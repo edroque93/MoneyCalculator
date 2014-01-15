@@ -1,37 +1,49 @@
 package moneycalculator;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import moneycalculator.control.ActionListenerFactory;
+import moneycalculator.control.CalculateCommand;
 import moneycalculator.control.Command;
-import moneycalculator.model.Currency;
-import moneycalculator.model.CurrencySet;
+import moneycalculator.control.CommandDictionary;
+import moneycalculator.persistence.MockCurrencySetLoader;
 import moneycalculator.ui.swing.ApplicationFrame;
 
 public class Application {
     
     private ApplicationFrame frame;
-    private Map<String, Command> commandMap;
+    private CommandDictionary commandDictionary;
     
     public static void main(String[] args) {
         new Application().execute();
     }
 
     private void execute() {
-        // Load currency..
-        CurrencySet.getInstance().add(new Currency("EUR", "Euro", "€"));
-        CurrencySet.getInstance().add(new Currency("USD", "Dólar americano", "$"));
-        // Load exchange rate...
+        MockCurrencySetLoader.getInstance().load();
+
+        frame = new ApplicationFrame(new ActionListenerFactory() {
+            @Override
+            public ActionListener getAction(final String action) {
+                return new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        commandDictionary.get(action).execute();
+                    }
+                };
+            }
+        });
         
-        
-        
-        frame = new ApplicationFrame();//createActionListenerFactory());
-        //frame.getImageViewer().setImage(list.get(0));
         createCommands();
-        frame.setVisible(true);
     }
 
     private void createCommands() {
-        commandMap = new HashMap<>();
-       // commandMap.put("Calculate", new CalculateCommand());
+        commandDictionary = new CommandDictionary();
+        commandDictionary.register("Calculate", new CalculateCommand(frame.getMoneyDialog(), frame.getCurrencyDialog()));
+        commandDictionary.register("Exit", new Command() {
+            @Override
+            public void execute() {
+                frame.dispose();
+            }
+        });
     }
 }

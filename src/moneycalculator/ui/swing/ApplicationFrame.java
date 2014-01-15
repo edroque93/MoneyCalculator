@@ -3,24 +3,26 @@ package moneycalculator.ui.swing;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import moneycalculator.control.ActionListenerFactory;
+import moneycalculator.ui.CurrencyDialog;
+import moneycalculator.ui.MoneyDialog;
 
 public class ApplicationFrame extends JFrame {
-    
-    private MoneyPanel moneyPanel;
-    private CurrencyPanel currencyPanel;
 
-    public ApplicationFrame() {
+    private MoneyDialog moneyDialog;
+    private CurrencyDialog currencyDialog;
+    private ActionListenerFactory factory;
+
+    public ApplicationFrame(ActionListenerFactory factory) {
         super("Money Calculator");
-        
-        moneyPanel = new MoneyPanel();
-        currencyPanel = new CurrencyPanel();
-        
-        this.setMinimumSize(new Dimension(300, 300));
+
+        this.factory = factory;
+        this.setMinimumSize(new Dimension(370, 170));
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         createComponents();
         this.setVisible(true);
@@ -40,38 +42,46 @@ public class ApplicationFrame extends JFrame {
 
     private JButton createExitButton() {
         JButton button = new JButton("Exit");
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                exit();
-            }
-        });
+        button.addActionListener(factory.getAction("Exit"));
         return button;
     }
 
     private JButton createCalculateButton() {
         JButton button = new JButton("Calculate");
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                calculate();
-            }
-        });
+        button.addActionListener(factory.getAction("Calculate"));
         return button;
-    }
-
-    private void exit() {
-        dispose();
-    }
-
-    private void calculate() {
-        //new CalculateCommand(new MoneyPanel(),new CurrencyPanel(),null);
     }
 
     private JPanel createContent() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panel.add(moneyPanel);
-        panel.add(currencyPanel);
+        panel.add(createMoneyDialogPanel());
+        panel.add(createCurrencyDialogPanel());
         return panel;
     }
+
+    private JPanel createMoneyDialogPanel() {
+        MoneyDialogPanel panel = new MoneyDialogPanel();
+        moneyDialog = panel;
+        return panel;
+    }
+
+    private JPanel createCurrencyDialogPanel() {
+        CurrencyDialogPanel panel = new CurrencyDialogPanel();
+        currencyDialog = panel;
+        return panel;
+    }
+
+    public MoneyDialog getMoneyDialog() {
+        return moneyDialog;
+    }
+
+    public CurrencyDialog getCurrencyDialog() {
+        return currencyDialog;
+    }
+
+    private JLabel createResultLabel() {
+        JLabel label = new JLabel("");
+        return label;
+    }
+
 }
